@@ -1,0 +1,98 @@
+<!DOCTYPE -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css">
+	<script type="text/javascript" src="js/jQuery.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready (function (){
+			//alert("funcionando..........");
+			$("#btnGuarda").click(function(){
+				var nom=$("#nombre").val();
+				var dir=$("#direccion").val();
+				var rfc=$("#rfc").val();
+				var tel=$("#telefono").val();
+				var clasif=$("#clasificacion").val();
+				var foto="img/fotos/foto.jpg";
+				var lat=$("#latitud").val();
+				var long=$("#longitud").val();
+				//alert("funcionando..........");
+				$.ajax({
+					type:"POST",
+					url:"Guardar.php",
+					data:"Nom="+nom+"&Dir="+dir+"&RFC="+rfc+"&Tel="+tel+"&Clas="+clasif+"&Foto="+foto+"&Lat="+lat+"&Long="+long,
+					success: function respuesta(datos){
+								alert(datos);
+							}
+				});
+			});
+		});
+	</script>
+	<style type="text/css">
+		p{
+			text-align: center;
+		}
+		
+	</style>
+</head>
+<body>
+	<div data-role="page" id="Principal" data-theme="b">
+		<div data-role="header">
+			<p class="colorVerde">Catálogo de Servicios Libres</p>
+			<p>Operaciones</p>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview" text-aling="center">
+				<li><a href="#Registro" data-transition="flow">Registrar Servicios</a></li>
+				<li><a href="#Consulta" data-transition="flow">Consultar Servicios</a></li>
+				<li><a href="" data-transition="flow">Actualizar Servicios</a></li>
+				<li><a href="" data-transition="flow">Eliminar Servicios</a></li>
+			</ul>
+		</div>
+		<div data-role="footer">
+			<p><a href="Principal" class="ui-btn ui-icon-home ui-btn-icon-left">Acerca de ...</a></p>
+		</div>
+	</div>
+	
+	<div data-role="page" id="Registro" data-theme="b" class="fondo"> <!--Segunda interfaz-->
+		<div data-role="header">
+			<p>Registro de Servicios</p>
+		</div>
+		<div data-role="content">
+			<input type="text" id="nombre" placeholder="Nombre del servicio">
+			<input type="text" id="direccion" placeholder="Dirección">
+			<input type="text" id="rfc" placeholder="RFC">
+			<input type="text" id="telefono" placeholder="Teléfono">
+			<select id="clasificacion">
+				<option value="Hospital" selected="selected">Hospital</option>
+         		<option value="Zapateria">Zapateria</option>
+       			<option value="Restaurant">Restaurant</option>
+       			<option value="Farmacia">Farmacia</option>
+   			</select>
+			<input type="button" id="btnFoto" value="Tomar Foto">
+			<input type="button" id="btnCorde" value="Obtener Coordenadas">
+			<input type="text" id="longitud" placeholder="Longitud">
+			<input type="text" id="latitud" placeholder="Latitud">
+			<input type="button" id="btnGuarda" value="Guardar servicio">
+		</div>
+		<div data-role="footer">
+			<p><a href="#Principal" class="ui-btn ui-icon-home ui-btn-icon-left">Regresar</a></p>
+		</div>
+	</div>
+	<div data-role="page" id="Consulta" data-theme="b">
+		<div data-role="header">
+			<p>Consultar servicios</p>
+		</div>	
+		<div data-role="content">
+			<input type="button" id="btnConsultar" value="Consultar todos los servicios">
+			<div id="resConsultaTodos"></div>
+		</div>
+		<div data-role="footer">
+			<p><a href="#Principal" class="ui-btn ui-icon-home ui-btn-icon-left">Regresar</a></p>
+		</div>
+	</div>
+</body>
+</html>
